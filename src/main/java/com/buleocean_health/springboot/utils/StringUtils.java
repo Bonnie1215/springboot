@@ -232,21 +232,21 @@ public class StringUtils {
 	 
 	/**
 	 * 检查身份证的格式，返回true表示是，反之为否
-	 * 
+	 * 强校验身份证号是否合法
 	 * @param email
 	 * @return
 	 */
 	public static boolean isCard(String cardId) {
-		if (isEmpty(cardId)) {
-			return false;
-		}
-		//身份证正则表达式(15位) 
-		Pattern isIDCard1=Pattern.compile("^[1-9]\\d{7}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}$"); 
-		//身份证正则表达式(18位) 
-		Pattern isIDCard2=Pattern.compile("^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}([0-9]|X)$"); 
-		Matcher matcher1= isIDCard1.matcher(cardId);
-		Matcher matcher2= isIDCard2.matcher(cardId);
-		return matcher1.matches()||matcher2.matches();
+//		if (isEmpty(cardId)) {
+//			return false;
+//		}
+//		//身份证正则表达式(15位) 
+//		Pattern isIDCard1=Pattern.compile("^[1-9]\\d{7}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}$"); 
+//		//身份证正则表达式(18位) 
+//		Pattern isIDCard2=Pattern.compile("^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}([0-9]|X)$"); 
+//		Matcher matcher1= isIDCard1.matcher(cardId);
+//		Matcher matcher2= isIDCard2.matcher(cardId);
+		return IdCardValidator.isValidatedAllIdcard(cardId);
 	}
 
 	/**

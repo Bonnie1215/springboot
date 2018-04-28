@@ -1,5 +1,6 @@
 package com.buleocean_health.springboot.utils;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -10,11 +11,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.springframework.format.datetime.DateFormatter;
-
 import com.buleocean_health.springboot.common.em.TimeType;
 
 public class TimeUtils {
@@ -163,20 +159,20 @@ public class TimeUtils {
 	}
 	
 	/**
-	 * 校验日期格式 yyyy.MM.dd
+	 * 校验日期格式 yyyy.MM.dd, yyyy.MM.d, yyyy.M.dd, yyyy.MM.dd
 	 * @param date
-	 * @return
+	 * @return true:格式异常 false:格式正常
 	 */
 	public static boolean checkDate(String date) {
-		boolean flag = false;
-		String eL = "[0-9]{4}.[0-9]{2}.[0-9]{2}";
-		Pattern p = Pattern.compile(eL);
-		Matcher m = p.matcher(date);
-		boolean dateFlag = m.matches();
-		if (!dateFlag) {
-			flag = true;
-		} 
-		return flag;
+		try {
+			DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+			// 用来控制是否将正确格式的不正确时间转化成正确的时间，默认为true，设置为false时，如果时间不正确，不会自动转化，，而是抛出java.text.ParseException异常。
+			dateFormat.setLenient(false);
+			dateFormat.parse(date);
+		} catch (ParseException e) {
+			return true;
+		}
+		return false;
 	}
 	
 }
