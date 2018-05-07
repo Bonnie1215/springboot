@@ -17,7 +17,8 @@ import com.buleocean_health.springboot.service.ScheduleService;
 public class ScheduleServiceImpl implements ScheduleService{
 
 	// 使用cron表达式
-	@Scheduled(cron="0/30 * * * * *")//每隔30秒钟执行一次
+//	@Scheduled(cron="0/30 * * * * *")//每隔30秒钟执行一次
+	@Scheduled(cron="0 0/30 * * * ?")//每隔30分钟执行一次
 	@Override
 	public void schedule() {
 		//TODO 注意, 如果方法中的程序在周期内(30S)内无法执行完成, 会开启两次, 自行控制
